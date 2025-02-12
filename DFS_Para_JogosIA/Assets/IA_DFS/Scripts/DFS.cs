@@ -99,25 +99,6 @@ public class DFS : MonoBehaviour
         return false;
     }
 
-
-    // void MostrarCaminho()
-    // {
-    //     foreach (var posicao in caminho)
-    //     {
-    //         // Encontra a célula no grid e muda sua cor
-    //         GameObject caminhoEncontrado = GameObject.Find($"Caminho {posicao.x},{posicao.y}");
-
-    //         if (caminhoEncontrado != null && caminhoEncontrado.name != GameObject.Find($"Caminho {posicaoFinal.x},{posicaoFinal.y}").name)
-    //         {
-    //             // caminhoEncontrado.GetComponent<SpriteRenderer>().material.color = Color.green;
-    //             Color corCaminho = caminhoEncontrado.GetComponent<SpriteRenderer>().material.color;
-    //             corCaminho.g = 255;
-    //             caminhoEncontrado.GetComponent<SpriteRenderer>().material.color = corCaminho;
-    //             Debug.Log(caminhoEncontrado.name);
-    //         }
-    //     }
-    // }
-
     // Destaca o caminho encontrado
     IEnumerator MostrarCaminho()
     {
