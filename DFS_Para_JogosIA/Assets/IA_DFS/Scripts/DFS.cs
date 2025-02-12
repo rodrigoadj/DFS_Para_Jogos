@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Collections;
 
 public class DFS : MonoBehaviour
 {
@@ -64,11 +65,12 @@ public class DFS : MonoBehaviour
                 // Verifica se a próxima posição é válida e não foi visitada
                 if (VerificarPosicao(proxPosicao) && !casaVisitada[proxPosicao.x, proxPosicao.y])
                 {
-                    if(proxPosicao == posicaoFinal)
+                    if (proxPosicao == posicaoFinal)
                     {
                         Debug.Log("Caminho encontrado!");
                         caminho.Add(proxPosicao);
-                        MostrarCaminho();
+                        //MostrarCaminho();
+                        StartCoroutine(MostrarCaminho());
                         return;
                     }
                     pilhaCasas.Push(proxPosicao); // Adiciona à pilha
@@ -97,11 +99,31 @@ public class DFS : MonoBehaviour
         return false;
     }
 
+
+    // void MostrarCaminho()
+    // {
+    //     foreach (var posicao in caminho)
+    //     {
+    //         // Encontra a célula no grid e muda sua cor
+    //         GameObject caminhoEncontrado = GameObject.Find($"Caminho {posicao.x},{posicao.y}");
+
+    //         if (caminhoEncontrado != null && caminhoEncontrado.name != GameObject.Find($"Caminho {posicaoFinal.x},{posicaoFinal.y}").name)
+    //         {
+    //             // caminhoEncontrado.GetComponent<SpriteRenderer>().material.color = Color.green;
+    //             Color corCaminho = caminhoEncontrado.GetComponent<SpriteRenderer>().material.color;
+    //             corCaminho.g = 255;
+    //             caminhoEncontrado.GetComponent<SpriteRenderer>().material.color = corCaminho;
+    //             Debug.Log(caminhoEncontrado.name);
+    //         }
+    //     }
+    // }
+
     // Destaca o caminho encontrado
-    void MostrarCaminho()
+    IEnumerator MostrarCaminho()
     {
         foreach (var posicao in caminho)
         {
+            yield return new WaitForSeconds(1.5f);
             // Encontra a célula no grid e muda sua cor
             GameObject caminhoEncontrado = GameObject.Find($"Caminho {posicao.x},{posicao.y}");
 
