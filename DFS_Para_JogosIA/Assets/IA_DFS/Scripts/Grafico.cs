@@ -8,7 +8,7 @@ public class Grafico : MonoBehaviour
     public Vector2Int posicaoInicial;
     public List<Vector2Int> listaCaminho = new List<Vector2Int>();
     [SerializeField] GameObject caminho, parede, paredeDest, pontoInicial;
-    [SerializeField] Transform camera;
+    [SerializeField] Transform cam;
 
     [SerializeField] int quantParedeDest;
 
@@ -48,7 +48,7 @@ public class Grafico : MonoBehaviour
             }
         }
 
-        camera.transform.position = new Vector3((float)largura / 2 + 3f, (float)altura / 2, -10f);
+        cam.transform.position = new Vector3((float)largura / 2 + 3f, (float)altura / 2, -10f);
     }
 
     // GameObject SelecionarObjeto()

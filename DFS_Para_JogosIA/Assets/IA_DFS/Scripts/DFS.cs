@@ -33,15 +33,6 @@ public class DFS : MonoBehaviour
             // Remove o nó atual da pilha
             Vector2Int posicaoAtual = pilhaCasas.Pop();
 
-            // Verifica se a célula atual é o destino
-            //if (posicaoAtual == posicaoFinal)
-            //{
-            //    Debug.Log("Caminho encontrado!");
-            //    caminho.Add(posicaoAtual); // Adiciona a célula ao caminho
-            //    MostrarCaminho();
-            //    return;
-            //}
-
             // Marca a célula atual como visitada
             casaVisitada[posicaoAtual.x, posicaoAtual.y] = true;
 
