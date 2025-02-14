@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
+using TMPro;
 
 public class DFS : MonoBehaviour
 {
@@ -11,6 +12,9 @@ public class DFS : MonoBehaviour
     private Stack<Vector2Int> pilhaCasas = new Stack<Vector2Int>(); // Pilha para o DFS
     private List<Vector2Int> caminho = new List<Vector2Int>(); // Caminho encontrado
 
+    [SerializeField] TMP_Text txtPosicoes;
+    public GameObject personagem;
+
     void Start()
     {
         // Inicializa a matriz de visitados com base no layout do grid
@@ -19,9 +23,10 @@ public class DFS : MonoBehaviour
         casaVisitada = new bool[largura, altura];
 
         // Executa o DFS a partir do ponto inicial
-        DFSAlgorithm(scptGrafico.posicaoInicial);
+        //DFSAlgorithm(scptGrafico.posicaoInicial);
     }
 
+    // Executa o DFS a partir do ponto inicial
     void DFSAlgorithm(Vector2Int startPosition)
     {
         // Adiciona o ponto inicial à pilha
@@ -60,7 +65,6 @@ public class DFS : MonoBehaviour
                     {
                         Debug.Log("Caminho encontrado!");
                         caminho.Add(proxPosicao);
-                        //MostrarCaminho();
                         StartCoroutine(MostrarCaminho());
                         return;
                     }
@@ -90,39 +94,42 @@ public class DFS : MonoBehaviour
         return false;
     }
 
-    // Destaca o caminho encontrado
+    // Destaca o caminho percorrido
     IEnumerator MostrarCaminho()
     {
         foreach (var posicao in caminho)
         {
-            yield return new WaitForSeconds(1.5f);
-            // Encontra a célula no grid e muda sua cor
+            yield return new WaitForSeconds(0.6f);
+
             GameObject caminhoEncontrado = GameObject.Find($"Caminho {posicao.x},{posicao.y}");
 
             if (caminhoEncontrado != null && caminhoEncontrado.name != GameObject.Find($"Caminho {posicaoFinal.x},{posicaoFinal.y}").name)
             {
-                // caminhoEncontrado.GetComponent<SpriteRenderer>().material.color = Color.green;
+                personagem.transform.position = caminhoEncontrado.transform.position;
                 Color corCaminho = caminhoEncontrado.GetComponent<SpriteRenderer>().material.color;
                 corCaminho.g = 255;
                 caminhoEncontrado.GetComponent<SpriteRenderer>().material.color = corCaminho;
-                Debug.Log(caminhoEncontrado.name);
+                txtPosicoes.text = "Percorrenco " + caminhoEncontrado.name;
             }
         }
     }
 
     void SetarPosicaoFinal()
     {
-        //int random = Random.Range(0, scptGrafico.listaCaminho.Count);
-        //posicaoFinal = scptGrafico.listaCaminho[random];
-        //Debug.Log(posicaoFinal);
-        posicaoFinal = new Vector2Int(5, 4);
+        posicaoFinal = new Vector2Int(scptGrafico.listaCaminho[Random.Range(0, 64)].x, scptGrafico.listaCaminho[Random.Range(0, 64)].y);
 
         GameObject pontoFinal = GameObject.Find($"Caminho {posicaoFinal.x},{posicaoFinal.y}");
+
         if (pontoFinal != null)
         {
             Color cor = pontoFinal.GetComponent<SpriteRenderer>().material.color;
             cor.r = 255f;
             pontoFinal.GetComponent<Renderer>().material.color = cor;
         }
+    }
+
+    public void IniciarDFS()
+    {
+        DFSAlgorithm(scptGrafico.posicaoInicial);
     }
 }
