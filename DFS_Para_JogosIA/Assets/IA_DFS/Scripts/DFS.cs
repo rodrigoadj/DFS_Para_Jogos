@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
 using TMPro;
+using UnityEngine.UI;
 
 public class DFS : MonoBehaviour
 {
@@ -14,6 +15,8 @@ public class DFS : MonoBehaviour
 
     [SerializeField] TMP_Text txtPosicoes;
     public GameObject personagem;
+
+    public Button botao;
 
     void Start()
     {
@@ -131,5 +134,6 @@ public class DFS : MonoBehaviour
     public void IniciarDFS()
     {
         DFSAlgorithm(scptGrafico.posicaoInicial);
+        botao.interactable = false;
     }
 }
